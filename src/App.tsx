@@ -1,12 +1,12 @@
-import WeatherApp from "./section/WeatherApp";
-// import JokeGenarator from "./components/JokeGenarator";
+// import WeatherApp from "./section/WeatherApp";
+import JokeGenarator from "./section/JokeGenarator";
 // import BlogApp from "./components/BlogApp";
 
 const App = () => {
   return (
     <>
-      <WeatherApp />
-      {/* <JokeGenarator /> */}
+      {/* <WeatherApp /> */}
+      <JokeGenarator />
       {/* <BlogApp /> */}
     </>
   );
