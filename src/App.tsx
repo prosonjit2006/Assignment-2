@@ -1,4 +1,4 @@
-import WeatherApp from "./components/WeatherApp";
+import WeatherApp from "./section/WeatherApp";
 // import JokeGenarator from "./components/JokeGenarator";
 // import BlogApp from "./components/BlogApp";
 
