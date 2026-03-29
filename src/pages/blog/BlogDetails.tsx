@@ -44,14 +44,20 @@ const BlogDetails = () => {
           <div className="flex justify-between items-center my-4">
             <p className="font-semibold">Views: {blog?.views}</p>
             <p className="font-semibold">Likes: {blog?.reactions?.likes}</p>
-            <p className=" text-gray-800">Dislikes: {blog?.reactions?.dislikes}</p>
+            <p className=" text-gray-800">
+              Dislikes: {blog?.reactions?.dislikes}
+            </p>
             <p className="text-sm text-gray-700">Post ID: {blog?.id}</p>
           </div>
 
           <div className="flex justify-between items-center">
-            <p className="font-semibold ">Tags: 
-              {blog.tags.map((itm, index) => 
-              <span key={index} className="mx-3">{itm}</span> )} 
+            <p className="font-semibold ">
+              Tags:
+              {blog.tags.map((itm, index) => (
+                <span key={index} className="mx-3">
+                  {itm}
+                </span>
+              ))}
             </p>
           </div>
         </div>
