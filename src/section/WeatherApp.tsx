@@ -52,6 +52,8 @@ const WeatherApp = () => {
     <div className="w-full h-screen flex flex-col items-center justify-center">
       <h1 className=" text-2xl my-2 font-bold font-serif">Weather App</h1>
 
+      {/* form -  */}
+      {/* <form> */}
       <input
         type="text"
         name="city"
@@ -66,6 +68,7 @@ const WeatherApp = () => {
       >
         Get Weather
       </button>
+      {/* </form> */}
 
       {/* data updata on the ui */}
       <div className="mt-5 gap-2">
