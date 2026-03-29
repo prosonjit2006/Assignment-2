@@ -4,7 +4,7 @@ import { topBarItems } from "../services/json/global.json";
 const TopBar = () => {
   const location = useLocation();
 
-  console.log("location", location);
+  // console.log("location", location);
 
   return (
     <>

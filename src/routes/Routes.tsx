@@ -41,8 +41,8 @@ const Routes = createBrowserRouter([
         element: <BlogWrapper />,
         children: [
           {
-            path: 'home',
-            // index: true,
+            // path: '/blogapp/home',
+            index: true,
             element: <Home />,
             errorElement: <ErrorBoundary />,
           },

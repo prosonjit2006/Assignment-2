@@ -7,7 +7,7 @@ export const topBarItems = [
 export const navBarItems = [
   {
     name: "Home",
-    path: "/blogapp/home",
+    path: "/blogapp",
   },
   {
     name: "Blog Details",
