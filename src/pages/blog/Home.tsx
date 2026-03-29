@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
 import type { BlogDataType } from "../../types/type/global.type";
 import { useNavigate } from "react-router-dom";
+// import type { MessageInterface } from "../../types/interface/global.interface";
 
 const Home = () => {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState<unknown>(""); // condition rendering is not working on type unknown
+
+  console.log('err message', error);
+  
   const [blog, setblog] = useState<BlogDataType[]>([]);
 
   const navigate = useNavigate();
@@ -28,8 +32,8 @@ const Home = () => {
 
         setblog(data.posts);
       } catch (error) {
-        // console.log("err", error.message);
-        setError(error?.message || "There is some problems");
+        // console.log("err message", error);
+        setError(error || "There is some problems");
       } finally {
         setLoading(false);
       }
@@ -45,7 +49,7 @@ const Home = () => {
           <p className=" text-red-500 text-xl text-center">Loading...</p>
         )}
 
-        {error && <p className=" text-red-500 text-xl text-center">{error}</p>}
+        {/* {error && <p className=" text-red-500 text-xl text-center">{error}</p>} */}
 
         {blog?.map((itm) => (
           <div

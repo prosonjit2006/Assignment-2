@@ -12,12 +12,13 @@ Practice: Understand conditional rendering in React.
 */
 
 import { useState } from "react";
+import type { WeatherDataType } from "../types/interface/global.interface";
 
 const API_KEY = "745505447eb0971a4c8993ef1fd6e91d";
 
 const WeatherApp = () => {
-  const [city, setCity] = useState("");
-  const [weather, setWeather] = useState<null>(null);
+  const [city, setCity] = useState<string>("");
+  const [weather, setWeather] = useState<WeatherDataType | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -27,8 +28,7 @@ const WeatherApp = () => {
     setLoading(true);
     setError("");
 
-
-// fetch data using axios 
+    // fetch data using axios
 
     try {
       const response = await fetch(
@@ -43,8 +43,13 @@ const WeatherApp = () => {
 
       const data = await response.json();
       setWeather(data);
-    } catch (error: any) {
-      setError(error.message);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError("Unknown error");
+      }
+      // setError(error.message);
       setWeather(null);
     } finally {
       setLoading(false);

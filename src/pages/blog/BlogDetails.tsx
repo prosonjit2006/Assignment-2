@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import type { BlogInterface } from "../../types/interface/global.interface";
 
 const BlogDetails = () => {
   const params = useParams();
 
-  const [blog, setBlog] = useState(null);
+  const [blog, setBlog] = useState<BlogInterface | null >(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -15,11 +16,17 @@ const BlogDetails = () => {
         const res = await fetch(`https://dummyjson.com/posts/${params.id}`);
         const data = await res.json();
 
-        console.log("single blog:", data);
+        // console.log("single blog:", data);
 
         setBlog(data);
-      } catch (err: any) {
-        setError(`Failed to fetch blog ${err.message}`);
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          setError(error.message);
+        } else {
+          setError("Unknown error");
+        }
+        
+        // setError(`Failed to fetch blog ${err.message}`);
       } finally {
         setLoading(false);
       }

@@ -31,8 +31,13 @@ const JokeGenarator = () => {
 
       // setBtnClick("");
       setJoke(data);
-    } catch (error) {
-      setError(error?.message);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError("Unknown error");
+      }
+      // setError(error);
     } finally {
       setLoading(false);
     }
