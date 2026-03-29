@@ -41,13 +41,13 @@ const Routes = createBrowserRouter([
         element: <BlogWrapper />,
         children: [
           {
-            // path: ' home',
-            index: true,
+            path: 'home',
+            // index: true,
             element: <Home />,
             errorElement: <ErrorBoundary />,
           },
           {
-            path: " blogdetails",
+            path: "blogdetails",
             element: <BlogDetails />,
             errorElement: <ErrorBoundary />,
           },
