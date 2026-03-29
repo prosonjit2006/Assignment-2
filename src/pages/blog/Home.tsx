@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
+import type { BlogDataType } from "../../types/type/global.type";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [blog, setblog] = useState<null>(null);
+  const [blog, setblog] = useState<BlogDataType[]>([]);
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     const handelBlog = async () => {
@@ -22,8 +26,8 @@ const Home = () => {
 
         setblog(data.posts);
       } catch (error) {
-        // console.log("err", error.massage);
-        setError(error?.massage)
+        // console.log("err", error.message);
+        setError(error?.message || "There is some problems");
       } finally {
         setLoading(false);
       }
@@ -55,16 +59,16 @@ const Home = () => {
               </p>
             </div>
 
-            <div className="flex flex-row items-center justify-between">
+            <div className=" w-full flex items-center justify-between">
               <button
-                onClick={() => {}}
+                onClick={() => navigate(`/blogapp/blog/${itm?.id}`)}
                 className="mt-3 px-3 py-2 bg-blue-400 rounded-md hover:bg-blue-500 hover:text-gray-100 hover:scale-105 hover:-translate-y-1 transition-all duration-300"
               >
                 View Details
               </button>
 
-              <p>
-                Views: <span>{itm.views}</span>
+              <p className="font-bold text-shadow-xl p-2 ">
+                Views: <span className="font-semibold">{itm?.views}</span>
               </p>
             </div>
           </div>
