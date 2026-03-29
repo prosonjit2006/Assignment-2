@@ -11,6 +11,9 @@ import Home from "../pages/blog/Home";
 import BlogDetails from "../pages/blog/BlogDetails";
 import Author from "../pages/blog/Author";
 
+
+// use lazy loading in the page
+
 const Routes = createBrowserRouter([
   {
     path: "/",
@@ -47,12 +50,12 @@ const Routes = createBrowserRouter([
             errorElement: <ErrorBoundary />,
           },
           {
-            path: "blogdetails",
+            path: "blog/:id",
             element: <BlogDetails />,
             errorElement: <ErrorBoundary />,
           },
           {
-            path: "author",
+            path: "author/:authorId",
             element: <Author />,
             errorElement: <ErrorBoundary />,
           },

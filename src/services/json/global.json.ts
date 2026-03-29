@@ -9,12 +9,13 @@ export const navBarItems = [
     name: "Home",
     path: "/blogapp",
   },
-  {
-    name: "Blog Details",
-    path: "/blogapp/blogdetails",
-  },
+  // {
+  //   name: "Blog Details",
+  //   path: "/blogapp/blogdetails",
+  // },
   {
     name: "Author",
     path: "/blogapp/author",
   },
 ];
+

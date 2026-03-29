@@ -27,6 +27,9 @@ const WeatherApp = () => {
     setLoading(true);
     setError("");
 
+
+// fetch data using axios 
+
     try {
       const response = await fetch(
         `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`,
@@ -52,7 +55,7 @@ const WeatherApp = () => {
     <div className="w-full h-screen flex flex-col items-center justify-center">
       <h1 className=" text-2xl my-2 font-bold font-serif">Weather App</h1>
 
-      {/* form -  */}
+      {/* form - not used form */}
       {/* <form> */}
       <input
         type="text"
