@@ -7,7 +7,7 @@ const Home = () => {
   const [error, setError] = useState("");
   const [blog, setblog] = useState<BlogDataType[]>([]);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handelBlog = async () => {
@@ -15,7 +15,7 @@ const Home = () => {
 
       // if(!blog) return;
 
-// use axios for fetching data
+      // use axios for fetching data
 
       try {
         const response = await fetch("https://dummyjson.com/posts");
@@ -50,7 +50,7 @@ const Home = () => {
         {blog?.map((itm) => (
           <div
             key={itm?.id}
-            className=" border border-gray-600 p-5  rounded-md w-[460px] flex flex-col items-start justify-between "
+            className=" border border-gray-300 p-5  rounded-md w-[460px] flex flex-col items-start justify-between shadow-xl "
           >
             <div>
               <h3 className=" font-bold text-xl mb-2">
@@ -70,10 +70,10 @@ const Home = () => {
               </button>
 
               <button
-                onClick={() => navigate(`/blogapp/blog/${itm?.id}`)}
+                onClick={() => navigate(`author/${itm?.id}`)}
                 className="mt-3 px-3 py-2 bg-green-400 rounded-md hover:bg-green-500 hover:text-gray-100 hover:scale-105  transition-all duration-300"
               >
-                View Details
+                Author's Post
               </button>
 
               <p className="font-bold text-shadow-xl p-2 ">
