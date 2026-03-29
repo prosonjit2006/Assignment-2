@@ -12,12 +12,14 @@ const Author = () => {
     const fetchBlog = async () => {
       setLoading(true);
       try {
+
+        // use axios
         const res = await fetch(
           `https://jsonplaceholder.typicode.com/posts/${params.authorId}`,
         );
         const data = await res.json();
 
-        console.log("single blog:", data);
+        // console.log("single blog:", data);
 
         setBlog(data);
       } catch (err: any) {

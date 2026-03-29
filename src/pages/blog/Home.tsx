@@ -24,7 +24,7 @@ const Home = () => {
 
         const data = await response.json();
 
-        console.log("jsonData", data.posts);
+        // console.log("jsonData", data.posts);
 
         setblog(data.posts);
       } catch (error) {
