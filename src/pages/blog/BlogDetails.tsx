@@ -53,7 +53,7 @@ const BlogDetails = () => {
           <div className="flex justify-between items-center">
             <p className="font-semibold ">
               Tags:
-              {blog.tags.map((itm, index) => (
+              {blog?.tags?.map((itm, index) => (
                 <span key={index} className="mx-3">
                   {itm}
                 </span>
