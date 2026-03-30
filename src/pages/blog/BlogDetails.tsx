@@ -1,38 +1,48 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import type { BlogInterface } from "../../types/interface/global.interface";
+import axios from "axios";
 
 const BlogDetails = () => {
   const params = useParams();
 
-  const [blog, setBlog] = useState<BlogInterface | null >(null);
-  const [loading, setLoading] = useState(false);
+  const [blog, setBlog] = useState<BlogInterface | null>(null);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
   useEffect(() => {
-    const fetchBlog = async () => {
-      setLoading(true);
-      try {
-        const res = await fetch(`https://dummyjson.com/posts/${params.id}`);
-        const data = await res.json();
+    axios
+      .get(`https://dummyjson.com/posts/${params.id}`)
+      .then((response) => {
+        // console.log('res', response);
+        setBlog(response.data);
+      })
+      .catch((error) => setError(error.message))
+      .finally(() => setLoading(false));
 
-        // console.log("single blog:", data);
+    // const fetchBlog = async () => {
+    //   setLoading(true);
+    //   try {
+    //     const res = await fetch(`https://dummyjson.com/posts/${params.id}`);
+    //     const data = await res.json();
 
-        setBlog(data);
-      } catch (error: unknown) {
-        if (error instanceof Error) {
-          setError(error.message);
-        } else {
-          setError("Unknown error");
-        }
-        
-        // setError(`Failed to fetch blog ${err.message}`);
-      } finally {
-        setLoading(false);
-      }
-    };
+    //     // console.log("single blog:", data);
 
-    if (params.id) fetchBlog();
+    //     setBlog(data);
+    //   } catch (error: unknown) {
+    //     if (error instanceof Error) {
+    //       setError(error.message);
+    //     } else {
+    //       setError("Unknown error");
+    //     }
+
+    //     // setError(`Failed to fetch blog ${err.message}`);
+    //   } finally {
+    //     setLoading(false);
+    //   }
+    // };
+
+    // if (params.id) fetchBlog();
   }, [params]);
 
   return (

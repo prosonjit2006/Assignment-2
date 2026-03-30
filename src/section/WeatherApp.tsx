@@ -13,6 +13,7 @@ Practice: Understand conditional rendering in React.
 
 import { useState } from "react";
 import type { WeatherDataType } from "../types/interface/global.interface";
+import axios from "axios";
 
 const API_KEY = "745505447eb0971a4c8993ef1fd6e91d";
 
@@ -28,32 +29,43 @@ const WeatherApp = () => {
     setLoading(true);
     setError("");
 
+    axios
+      .get(
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`,
+      )
+      .then((response) => {
+        console.log("res", response);
+        setWeather(response.data);
+      })
+      .catch((error) => setError(error.message))
+      .finally(() => setLoading(false));
+
     // fetch data using axios
 
-    try {
-      const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`,
-      );
+    // try {
+    //   const response = await fetch(
+    //     `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`,
+    //   );
 
-      console.log("res", response);
+    //   console.log("res", response);
 
-      if (!response.ok) {
-        throw new Error("City not found");
-      }
+    //   if (!response.ok) {
+    //     throw new Error("City not found");
+    //   }
 
-      const data = await response.json();
-      setWeather(data);
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        setError(error.message);
-      } else {
-        setError("Unknown error");
-      }
-      // setError(error.message);
-      setWeather(null);
-    } finally {
-      setLoading(false);
-    }
+    //   const data = await response.json();
+    //   setWeather(data);
+    // } catch (error: unknown) {
+    //   if (error instanceof Error) {
+    //     setError(error.message);
+    //   } else {
+    //     setError("Unknown error");
+    //   }
+    //   // setError(error.message);
+    //   setWeather(null);
+    // } finally {
+    //   setLoading(false);
+    // }
   };
 
   return (

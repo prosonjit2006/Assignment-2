@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import type { BlogInterface } from "../../types/interface/global.interface";
+import axios from "axios";
 
 const Author = () => {
   const params = useParams();
@@ -10,34 +11,44 @@ const Author = () => {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    const fetchBlog = async () => {
-      setLoading(true);
-      try {
+    axios
+      .get(`https://jsonplaceholder.typicode.com/posts/${params.authorId}`)
+      .then((response) => {
+        // console.log('res', response);
 
-        // use axios
-        const res = await fetch(
-          `https://jsonplaceholder.typicode.com/posts/${params.authorId}`,
-        );
-        const data = await res.json();
+        setBlog(response.data);
+      })
+      .catch((error) => setError(error.message))
+      .finally(() => setLoading(false));
 
-        // console.log("single blog:", data);
+    // const fetchBlog = async () => {
+    //   setLoading(true);
+    //   try {
 
-        setBlog(data);
-      } catch (error: unknown) {
+    //     // use axios
+    //     const res = await fetch(
+    //       `https://jsonplaceholder.typicode.com/posts/${params.authorId}`,
+    //     );
+    //     const data = await res.json();
 
-        if (error instanceof Error) {
-          setError(error.message);
-        } else {
-          setError("Unknown error");
-        }
+    //     // console.log("single blog:", data);
 
-        // setError(`Failed to fetch blog ${err.message}`);
-      } finally {
-        setLoading(false);
-      }
-    };
+    //     setBlog(data);
+    //   } catch (error: unknown) {
 
-    if (params.authorId) fetchBlog();
+    //     if (error instanceof Error) {
+    //       setError(error.message);
+    //     } else {
+    //       setError("Unknown error");
+    //     }
+
+    //     // setError(`Failed to fetch blog ${err.message}`);
+    //   } finally {
+    //     setLoading(false);
+    //   }
+    // };
+
+    // if (params.authorId) fetchBlog();
   }, [params]);
 
   return (

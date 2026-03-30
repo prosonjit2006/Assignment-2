@@ -1,45 +1,66 @@
 import { useEffect, useState } from "react";
 import type { BlogDataType } from "../../types/type/global.type";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 // import type { MessageInterface } from "../../types/interface/global.interface";
 
 const Home = () => {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<unknown>(""); // condition rendering is not working on type unknown
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-  console.log('err message', error);
-  
+  // console.log("err message", error);
+
   const [blog, setblog] = useState<BlogDataType[]>([]);
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    const handelBlog = async () => {
-      setLoading(true);
+    // setLoading(true);
+    
+    // const handelBlog = () => {
 
-      // if(!blog) return;
+      axios
+        .get("https://dummyjson.com/posts")
+        .then((response) => {
+          console.log("res", response.data);
+          setblog(response.data.posts);
+        })
+        .catch((error) => {
+          // console.log("err message", error.message);
+          setError(error.message);
+        })
+        .finally(() => setLoading(false));
+    // };
 
-      // use axios for fetching data
+    // handelBlog();
 
-      try {
-        const response = await fetch("https://dummyjson.com/posts");
+    // const handelBlog = async () => {
 
-        // console.log("res", response);
+    //   setLoading(true);
 
-        const data = await response.json();
+    //   // if(!blog) return;
 
-        // console.log("jsonData", data.posts);
+    //   // use axios for fetching data
 
-        setblog(data.posts);
-      } catch (error) {
-        // console.log("err message", error);
-        setError(error || "There is some problems");
-      } finally {
-        setLoading(false);
-      }
-    };
+    //   try {
+    //     const response = await fetch("https://dummyjson.com/posts");
 
-    handelBlog();
+    //     // console.log("res", response);
+
+    //     const data = await response.json();
+
+    //     // console.log("jsonData", data.posts);
+
+    //     setblog(data.posts);
+    //   } catch (error) {
+    //     // console.log("err message", error);
+    //     setError(error || "There is some problems");
+    //   } finally {
+    //     setLoading(false);
+    //   }
+    // };
+
+    // handelBlog();
   }, []);
   return (
     <div className="h-[90vh] w-full p-5">
@@ -49,7 +70,7 @@ const Home = () => {
           <p className=" text-red-500 text-xl text-center">Loading...</p>
         )}
 
-        {/* {error && <p className=" text-red-500 text-xl text-center">{error}</p>} */}
+        {error && <p className=" text-red-500 text-xl text-center">{error}</p>}
 
         {blog?.map((itm) => (
           <div

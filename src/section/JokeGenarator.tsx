@@ -7,6 +7,7 @@
 
 import { useEffect, useState } from "react";
 import type { JokeType } from "../types/type/global.type";
+import axios from "axios";
 
 const JokeGenarator = () => {
   // const [btnClick, setBtnClick] = useState("Click on the btn to get a joke");
@@ -15,36 +16,49 @@ const JokeGenarator = () => {
     punchline: "And the punchline will appear here",
   });
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  const newJoke = async () => {
-    setLoading(true);
-
-    try {
-      const response = await fetch(
-        "https://official-joke-api.appspot.com/random_joke",
-      );
-
-      // console.log("res", response);
-      const data = await response.json();
-      console.log("jsonData", data);
-
-      // setBtnClick("");
-      setJoke(data);
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        setError(error.message);
-      } else {
-        setError("Unknown error");
-      }
-      // setError(error);
-    } finally {
-      setLoading(false);
-    }
+  const handelJoke = () => {
+    axios
+      .get("https://official-joke-api.appspot.com/random_joke")
+      .then((response) => {
+        // console.log("res", response);
+        setJoke(response.data);
+      })
+      .catch((error) => setError(error.message))
+      .finally(() => setLoading(false));
   };
 
+  // const newJoke = async () => {
+  //   setLoading(true);
+
+  //   try {
+  //     const response = await fetch(
+  //       "https://official-joke-api.appspot.com/random_joke",
+  //     );
+
+  //     // console.log("res", response);
+  //     const data = await response.json();
+  //     console.log("jsonData", data);
+
+  //     // setBtnClick("");
+  //     setJoke(data);
+  //   } catch (error: unknown) {
+  //     if (error instanceof Error) {
+  //       setError(error.message);
+  //     } else {
+  //       setError("Unknown error");
+  //     }
+  //     // setError(error);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
+  // newJoke();
+
   useEffect(() => {
-    newJoke();
+    handelJoke();
   }, []);
 
   return (
@@ -85,7 +99,7 @@ const JokeGenarator = () => {
         )}
 
         <button
-          onClick={newJoke}
+          onClick={handelJoke}
           className=" px-4 py-2 text-gray-50 bg-blue-600 rounded-xl mt-5 hover:bg-blue-700 transition duration-300 active:duration-75 active:scale-110"
         >
           New Joke
