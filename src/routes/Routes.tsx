@@ -50,7 +50,7 @@ const Routes = createBrowserRouter([
             // errorElement: <ErrorBoundary />,
           },
           {
-            path: "blog/:id",
+            path: ":id",
             element: <BlogDetails />,
             errorElement: <ErrorBoundary />,
           },

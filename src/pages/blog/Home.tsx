@@ -22,7 +22,7 @@ const Home = () => {
       axios
         .get("https://dummyjson.com/posts")
         .then((response) => {
-          console.log("res", response.data);
+          // console.log("res", response.data);
           setblog(response.data.posts);
         })
         .catch((error) => {
@@ -88,7 +88,7 @@ const Home = () => {
 
             <div className=" w-full flex items-center justify-between">
               <button
-                onClick={() => navigate(`/blogapp/blog/${itm?.id}`)}
+                onClick={() => navigate(`/blogapp/${itm?.id}`)}
                 className="mt-3 px-3 py-2 bg-blue-400 rounded-md hover:bg-blue-500 hover:text-gray-100 hover:scale-105  transition-all duration-300"
               >
                 View Details
