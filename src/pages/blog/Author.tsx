@@ -7,7 +7,7 @@ const Author = () => {
   const params = useParams();
 
   const [blog, setBlog] = useState<BlogInterface | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -54,7 +54,7 @@ const Author = () => {
   return (
     <>
       {loading && (
-        <p className="text-center text-red-500 text-xl">Loading...</p>
+        <p className="text-center text-red-500 text-xl mt-5">Loading...</p>
       )}
 
       {error && <p className="text-center text-red-500">{error}</p>}
