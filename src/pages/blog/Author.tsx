@@ -60,7 +60,7 @@ const Author = () => {
     // if (params.authorId) fetchBlog();
   }, [order]);
 
-  console.log("data", author);
+  // console.log("data", author);
 
   return (
     <div className="h-[90vh] w-full p-5">

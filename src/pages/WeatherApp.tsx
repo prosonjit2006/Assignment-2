@@ -23,8 +23,8 @@ const WeatherApp = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const handelSbmit = (e: SubmitEvent): void => {
-    e.preventDefault();
+  const handelSbmit = (event: SubmitEvent): void => {
+    event.preventDefault();
   };
 
   const getWeather = async () => {
@@ -88,7 +88,10 @@ const WeatherApp = () => {
 
       {/* form  */}
 
-      <form onSubmit={() => handelSbmit}>
+      <form
+        onSubmit={() => handelSbmit(event as SubmitEvent)}
+        className="flex flex-col items-center"
+      >
         <input
           type="text"
           name="city"
@@ -102,7 +105,7 @@ const WeatherApp = () => {
           type="submit"
           value="Get Weather"
           onClick={getWeather}
-          className="mt-4 mb-2 p-3 bg-blue-600 text-white rounded-xl text-sm hover:bg-blue-800 hover:scale-105 transition-all duration-300"
+          className=" w-fit mt-4 mb-2 p-3 bg-blue-600 text-white rounded-xl text-sm hover:bg-blue-800 hover:scale-105 transition-all duration-300"
         />
       </form>
 

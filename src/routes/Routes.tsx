@@ -79,7 +79,7 @@ const Routes = createBrowserRouter([
                 // path: "author",
                 index: true,
                 element: <Author />,
-                errorElement: <ErrorBoundary/>,
+                errorElement: <ErrorBoundary />,
               },
               {
                 path: ":authorid",

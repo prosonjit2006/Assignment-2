@@ -4,14 +4,13 @@ import { topBarItems } from "../services/json/global.json";
 const TopBar = () => {
   const location = useLocation();
 
-  console.log("location", location);
+  // console.log("location", location);
 
   return (
     <>
       {!(
         location.pathname === "/blogapp" ||
-        location.pathname === "/blogapp/author" 
-        // location.pathname === "/blogapp/author/authorid"
+        location.pathname === "/blogapp/author"
       ) && (
         <div className=" absolute top-0 left-0 right-0 w-full py-4 px-10 bg-yellow-50 flex justify-between items-center">
           <div>
