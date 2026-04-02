@@ -11,6 +11,13 @@ export interface BlogInterface {
   };
 }
 
+export interface AuthorInterface {
+  id: number;
+  title: string;
+  body: string;
+  userId: number;
+}
+
 // export interface MessageInterface {
 //   message: string;
 // }

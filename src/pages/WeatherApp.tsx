@@ -11,7 +11,7 @@ Scope:
 Practice: Understand conditional rendering in React.
 */
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { WeatherDataType } from "../types/interface/global.interface";
 import axios from "axios";
 
@@ -37,7 +37,13 @@ const WeatherApp = () => {
         console.log("res", response);
         setWeather(response.data);
       })
-      .catch((error) => setError(error.message))
+      .catch((error) => {
+        // setError(`${error.message}\nCity Not Found`);
+        // setError(error.message + 'City Not Found');
+
+        setError( error.message  );
+        setWeather(null);
+      })
       .finally(() => setLoading(false));
 
     // fetch data using axios
@@ -67,6 +73,10 @@ const WeatherApp = () => {
     //   setLoading(false);
     // }
   };
+
+  useEffect(() => {
+    // console.log(setWeather);
+  }, [setWeather]);
 
   return (
     <div className="w-full h-screen flex flex-col items-center justify-center">

@@ -13,9 +13,9 @@ export const navBarItems = [
   //   name: "Blog Details",
   //   path: "/blogapp/blogdetails",
   // },
-  // {
-  //   name: "Author",
-  //   path: "/blogapp/author",
-  // },
+  {
+    name: "Author",
+    path: "/blogapp/author",
+  },
 ];
 

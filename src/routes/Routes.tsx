@@ -1,16 +1,18 @@
+import { lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router-dom";
 import NotFound from "../pages/NotFound";
 import ErrorBoundary from "../pages/ErrorBoundary";
 import WeatherWrapper from "../layout/weatherapp/WeatherWrapper";
-import WeatherApp from "../section/WeatherApp";
 import ParrentWrapper from "../layout/ParrentWrapper";
 import JokeWrapper from "../layout/jokeapp/JokeWrapper";
-import JokeGenarator from "../section/JokeGenarator";
 import BlogWrapper from "../layout/blogapp/BlogWrapper";
-import Home from "../pages/blog/Home";
+const Home = lazy(() => import("../pages/blog/Home"));
+// import Home from "../pages/blog/Home";
 import BlogDetails from "../pages/blog/BlogDetails";
 import Author from "../pages/blog/Author";
-
+import WeatherApp from "../pages/WeatherApp";
+import JokeGenarator from "../pages/JokeGenarator";
+// import FallBack from "../pages/FallBack";
 
 // use lazy loading in the page
 
@@ -46,7 +48,13 @@ const Routes = createBrowserRouter([
           {
             // path: '/blogapp/home',
             index: true,
-            element: <Home />,
+            // element: <Home />,
+            element: (
+              // <Suspense fallback={()=> (FallBack)}>
+              <Suspense fallback={<h2 className="text-center text-red-500 text-lg">Loading...</h2>}>
+                <Home />
+              </Suspense>
+            ),
             // errorElement: <ErrorBoundary />,
           },
           {
@@ -55,7 +63,7 @@ const Routes = createBrowserRouter([
             errorElement: <ErrorBoundary />,
           },
           {
-            path: "author/:authorId",
+            path: "author",
             element: <Author />,
             errorElement: <ErrorBoundary />,
           },

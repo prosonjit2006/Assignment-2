@@ -94,12 +94,12 @@ const Home = () => {
                 View Details
               </button>
 
-              <button
+              {/* <button
                 onClick={() => navigate(`author/${itm?.id}`)}
                 className="mt-3 px-3 py-2 bg-green-400 rounded-md hover:bg-green-500 hover:text-gray-100 hover:scale-105  transition-all duration-300"
               >
                 Author's Post
-              </button>
+              </button> */}
 
               <p className="font-bold text-shadow-xl p-2 ">
                 Views: <span className="font-semibold">{itm?.views}</span>

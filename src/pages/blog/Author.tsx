@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import type { BlogInterface } from "../../types/interface/global.interface";
+// import { useParams } from "react-router-dom";
 import axios from "axios";
+import type { AuthorInterface } from "../../types/interface/global.interface";
 
 const Author = () => {
-  const params = useParams();
+  // const params = useParams();
 
-  const [blog, setBlog] = useState<BlogInterface | null>(null);
+  const [blog, setBlog] = useState<AuthorInterface[] | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
   useEffect(() => {
     axios
-      .get(`https://jsonplaceholder.typicode.com/posts/${params.authorId}`)
+      .get(`https://jsonplaceholder.typicode.com/posts`)
       .then((response) => {
         // console.log('res', response);
 
@@ -49,23 +49,37 @@ const Author = () => {
     // };
 
     // if (params.authorId) fetchBlog();
-  }, [params]);
+  }, []);
 
   return (
-    <>
-      {loading && (
-        <p className="text-center text-red-500 text-xl mt-5">Loading...</p>
-      )}
+    <div className="h-[90vh] w-full p-5">
+      <h2 className=" font-bold text-2xl text-center">Author's Posts</h2>
+      <div className=" mt-2 p-5 flex flex-wrap gap-4 justify-center">
+        {loading && (
+          <p className="text-center text-red-500 text-xl mt-5">Loading...</p>
+        )}
 
-      {error && <p className="text-center text-red-500">{error}</p>}
-      {blog && (
-        <div className="p-6 max-w-2xl mx-auto">
-          <h1 className="text-3xl font-bold mb-4">{blog?.title}</h1>
+        {error && <p className="text-center text-red-500">{error}</p>}
 
-          <p className="text-gray-700 mb-6">{blog?.body}</p>
-        </div>
-      )}
-    </>
+        {blog?.map((itm) => (
+          <div
+            key={itm?.id}
+            className=" border border-gray-300 p-5  rounded-md w-[460px] flex flex-col items-start justify-between shadow-xl "
+          >
+            <div>
+              <h3 className=" font-bold text-xl mb-2">
+                Title: <span className="font-normal">{itm?.title}</span>
+              </h3>
+              <p className=" font-bold">
+                Body: <span className="font-normal">{itm?.body}</span>
+              </p>
+            </div>
+
+            
+          </div>
+        ))}
+      </div>
+    </div>
   );
 };
 
