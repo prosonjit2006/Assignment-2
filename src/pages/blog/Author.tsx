@@ -60,13 +60,13 @@ const Author = () => {
     // setBlog(dataOnSubmit);
   };
 
-  const handelOnChange = (value: number) => {
-    const dataOnChange = blog?.filter((author) => author.userId === value);
+  // const handelOnChange = (value: number) => {
+  //   const dataOnChange = blog?.filter((author) => author.userId === value);
 
-    console.log("dataOnChange", dataOnChange);
+  //   console.log("dataOnChange", dataOnChange);
 
-    // setBlog(dataOnChange);
-  };
+  //   // setBlog(dataOnChange);
+  // };
 
   useEffect(() => {
     console.log("setBlog changed");
@@ -80,7 +80,7 @@ const Author = () => {
           <input
             type="text"
             placeholder="Search Author's posts"
-            onChange={(e)=> handelOnChange(e.target.value)}
+            // onChange={(e)=> handelOnChange(e.target.value)}
             className="border border-gray-200 p-2 rounded-md"
           />
           <input
