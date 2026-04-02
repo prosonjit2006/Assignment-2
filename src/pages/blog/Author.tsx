@@ -51,9 +51,45 @@ const Author = () => {
     // if (params.authorId) fetchBlog();
   }, []);
 
+  const handelFormSubmit = () => {
+    event?.preventDefault();
+
+    const dataOnSubmit = blog?.filter((author) => author?.userId);
+    console.log("dataOnSubmit", dataOnSubmit);
+
+    // setBlog(dataOnSubmit);
+  };
+
+  const handelOnChange = (value: number) => {
+    const dataOnChange = blog?.filter((author) => author.userId === value);
+
+    console.log("dataOnChange", dataOnChange);
+
+    // setBlog(dataOnChange);
+  };
+
+  useEffect(() => {
+    console.log("setBlog changed");
+  }, [setBlog]);
+
   return (
     <div className="h-[90vh] w-full p-5">
-      <h2 className=" font-bold text-2xl text-center">Author's Posts</h2>
+      <div className="flex justify-between items-center px-10">
+        <h2 className=" font-bold text-2xl text-center">Author's Posts</h2>
+        <form onSubmit={handelFormSubmit} >
+          <input
+            type="text"
+            placeholder="Search Author's posts"
+            onChange={(e)=> handelOnChange(e.target.value)}
+            className="border border-gray-200 p-2 rounded-md"
+          />
+          <input
+            type="submit"
+            value="Search"
+            className="border border-e-gray-400 px-3 py-2 rounded-md ml-2"
+          />
+        </form>
+      </div>
       <div className=" mt-2 p-5 flex flex-wrap gap-4 justify-center">
         {loading && (
           <p className="text-center text-red-500 text-xl mt-5">Loading...</p>
@@ -74,8 +110,6 @@ const Author = () => {
                 Body: <span className="font-normal">{itm?.body}</span>
               </p>
             </div>
-
-            
           </div>
         ))}
       </div>

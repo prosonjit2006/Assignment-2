@@ -16,20 +16,20 @@ const Home = () => {
 
   useEffect(() => {
     // setLoading(true);
-    
+
     // const handelBlog = () => {
 
-      axios
-        .get("https://dummyjson.com/posts")
-        .then((response) => {
-          // console.log("res", response.data);
-          setblog(response.data.posts);
-        })
-        .catch((error) => {
-          // console.log("err message", error.message);
-          setError(error.message);
-        })
-        .finally(() => setLoading(false));
+    axios
+      .get("https://dummyjson.com/posts")
+      .then((response) => {
+        // console.log("res", response.data);
+        setblog(response.data.posts);
+      })
+      .catch((error) => {
+        // console.log("err message", error.message);
+        setError(error.message);
+      })
+      .finally(() => setLoading(false));
     // };
 
     // handelBlog();
@@ -62,6 +62,7 @@ const Home = () => {
 
     // handelBlog();
   }, []);
+
   return (
     <div className="h-[90vh] w-full p-5">
       <h2 className=" font-bold text-2xl text-center">Blog Posts</h2>

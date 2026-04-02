@@ -8,7 +8,10 @@ const TopBar = () => {
 
   return (
     <>
-      {!(location.pathname === "/blogapp") && (
+      {!(
+        location.pathname === "/blogapp" ||
+        location.pathname === "/blogapp/author"
+      ) && (
         <div className=" absolute top-0 left-0 right-0 w-full py-4 px-10 bg-yellow-50 flex justify-between items-center">
           <div>
             <h1 className="font-bold font-serif text-xl">Logo</h1>
