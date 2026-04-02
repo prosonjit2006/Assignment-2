@@ -12,6 +12,8 @@ import BlogDetails from "../pages/blog/BlogDetails";
 import Author from "../pages/blog/Author";
 import WeatherApp from "../pages/WeatherApp";
 import JokeGenarator from "../pages/JokeGenarator";
+import AuthorDetails from "../pages/blog/AuthorDetails";
+import AuthorWrapper from "../layout/AuthorWrapper";
 // import FallBack from "../pages/FallBack";
 
 // use lazy loading in the page
@@ -70,8 +72,21 @@ const Routes = createBrowserRouter([
           },
           {
             path: "author",
-            element: <Author />,
+            element: <AuthorWrapper />,
             errorElement: <ErrorBoundary />,
+            children: [
+              {
+                // path: "author",
+                index: true,
+                element: <Author />,
+                errorElement: <ErrorBoundary/>,
+              },
+              {
+                path: ":authorid",
+                element: <AuthorDetails />,
+                errorElement: <NotFound />,
+              },
+            ],
           },
         ],
       },

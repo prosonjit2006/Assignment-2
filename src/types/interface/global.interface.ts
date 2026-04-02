@@ -13,9 +13,22 @@ export interface BlogInterface {
 
 export interface AuthorInterface {
   id: number;
-  title: string;
-  body: string;
-  userId: number;
+  firstName: string;
+  lastName: string;
+  age: number;
+  email: string;
+  phone: string;
+  image: string;
+  university: string;
+  company: {
+    name: string;
+    title: string;
+  };
+  address: {
+    city: string;
+    state: string;
+    country: string;
+  };
 }
 
 // export interface MessageInterface {

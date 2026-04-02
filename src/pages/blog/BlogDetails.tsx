@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import type { BlogInterface } from "../../types/interface/global.interface";
 import axios from "axios";
+import { MoveLeft } from "lucide-react";
 
 const BlogDetails = () => {
   const params = useParams();
+  const navigate = useNavigate()
 
   const [blog, setBlog] = useState<BlogInterface | null>(null);
   const [loading, setLoading] = useState(true);
@@ -54,6 +56,16 @@ const BlogDetails = () => {
       {error && <p className="text-center text-red-500">{error}</p>}
       {blog && (
         <div className="p-6 max-w-2xl mx-auto">
+          <button
+            onClick={() => navigate("/blogapp")}
+            className="flex items-center gap-1 px-2 py-1 group transition-all duration-300 hover:scale-105 mb-2"
+          >
+            <MoveLeft
+              size={14}
+              className=" group-hover:-translate-x-[2px] transition-all duration-300"
+            />
+            Back
+          </button>
           <h1 className="text-3xl font-bold mb-4">{blog?.title}</h1>
 
           <p className="text-gray-700 ">{blog?.body}</p>
