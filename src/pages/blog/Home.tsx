@@ -7,6 +7,9 @@ import axios from "axios";
 const Home = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [order, setOrder] = useState<"asc" | "desc">("asc");
+
+  console.log("order data", order);
 
   // console.log("err message", error);
 
@@ -17,8 +20,7 @@ const Home = () => {
   useEffect(() => {
     // setLoading(true);
 
-    // const handelBlog = () => {
-
+    // const handelBlog = async () => {
     axios
       .get("https://dummyjson.com/posts")
       .then((response) => {
@@ -61,11 +63,30 @@ const Home = () => {
     // };
 
     // handelBlog();
-  }, []);
+  }, [order]);
 
   return (
     <div className="h-[90vh] w-full p-5">
-      <h2 className=" font-bold text-2xl text-center">Blog Posts</h2>
+      <div className="flex justify-between items-center px-16">
+        <h2 className=" font-bold text-2xl text-center">Blog Post</h2>
+
+        {/* order shorting  */}
+        <div>
+          <label htmlFor="select">
+            Order:{" "}
+            <select
+              name="order"
+              id="order"
+              value={order}
+              onChange={(e) => setOrder(e.target.value as "asc" | "desc")}
+              className="border border-gray-300 rounded-md px-2 py-1 text-gray-600 "
+            >
+              <option value="asc">Asending</option>
+              <option value="desc">Desending</option>
+            </select>
+          </label>
+        </div>
+      </div>
       <div className=" mt-2 p-5 flex flex-wrap gap-4 justify-center">
         {loading && (
           <p className=" text-red-500 text-xl text-center">Loading...</p>
