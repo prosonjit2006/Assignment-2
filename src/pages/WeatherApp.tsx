@@ -23,6 +23,10 @@ const WeatherApp = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  const handelSbmit = (e: SubmitEvent): void => {
+    e.preventDefault();
+  };
+
   const getWeather = async () => {
     if (!city) return;
 
@@ -41,7 +45,7 @@ const WeatherApp = () => {
         // setError(`${error.message}\nCity Not Found`);
         // setError(error.message + 'City Not Found');
 
-        setError( error.message  );
+        setError(error.message);
         setWeather(null);
       })
       .finally(() => setLoading(false));
@@ -82,23 +86,25 @@ const WeatherApp = () => {
     <div className="w-full h-screen flex flex-col items-center justify-center">
       <h1 className=" text-2xl my-2 font-bold font-serif">Weather App</h1>
 
-      {/* form - not used form */}
-      {/* <form> */}
-      <input
-        type="text"
-        name="city"
-        value={city}
-        onChange={(e) => setCity(e.target.value)}
-        placeholder="City Name"
-        className="border border-black rounded p-2"
-      />
-      <button
-        onClick={getWeather}
-        className="mt-4 mb-2 p-3 bg-blue-600 text-white rounded-xl text-sm hover:bg-blue-800 hover:scale-105 transition-all duration-300"
-      >
-        Get Weather
-      </button>
-      {/* </form> */}
+      {/* form  */}
+
+      <form onSubmit={() => handelSbmit}>
+        <input
+          type="text"
+          name="city"
+          value={city}
+          onChange={(e) => setCity(e.target.value)}
+          placeholder="City Name"
+          className="border border-black rounded p-2"
+        />
+
+        <input
+          type="submit"
+          value="Get Weather"
+          onClick={getWeather}
+          className="mt-4 mb-2 p-3 bg-blue-600 text-white rounded-xl text-sm hover:bg-blue-800 hover:scale-105 transition-all duration-300"
+        />
+      </form>
 
       {/* data updata on the ui */}
       <div className="mt-5 gap-2">

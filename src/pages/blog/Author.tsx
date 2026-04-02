@@ -9,10 +9,15 @@ const Author = () => {
   const [blog, setBlog] = useState<AuthorInterface[] | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [order, setOrder] = useState<"asc" | "desc">("asc");
 
   useEffect(() => {
     axios
-      .get(`https://jsonplaceholder.typicode.com/posts`)
+      .get(`https://jsonplaceholder.typicode.com/posts`, {
+        params: {
+          order: order,
+        },
+      })
       .then((response) => {
         // console.log('res', response);
 
@@ -49,46 +54,33 @@ const Author = () => {
     // };
 
     // if (params.authorId) fetchBlog();
-  }, []);
+  }, [order]);
 
-  const handelFormSubmit = () => {
-    event?.preventDefault();
-
-    const dataOnSubmit = blog?.filter((author) => author?.userId);
-    console.log("dataOnSubmit", dataOnSubmit);
-
-    // setBlog(dataOnSubmit);
-  };
-
-  // const handelOnChange = (value: number) => {
-  //   const dataOnChange = blog?.filter((author) => author.userId === value);
-
-  //   console.log("dataOnChange", dataOnChange);
-
-  //   // setBlog(dataOnChange);
-  // };
-
-  useEffect(() => {
-    console.log("setBlog changed");
-  }, [setBlog]);
+  // client site data shorting
+  const sortedBlog = blog
+    ? [...blog].sort((a, b) => (order === "asc" ? b.id - a.id : a.id - b.id))
+    : null;
 
   return (
     <div className="h-[90vh] w-full p-5">
-      <div className="flex justify-between items-center px-10">
+      <div className="flex justify-between items-center px-16">
         <h2 className=" font-bold text-2xl text-center">Author's Posts</h2>
-        <form onSubmit={handelFormSubmit} >
-          <input
-            type="text"
-            placeholder="Search Author's posts"
-            // onChange={(e)=> handelOnChange(e.target.value)}
-            className="border border-gray-200 p-2 rounded-md"
-          />
-          <input
-            type="submit"
-            value="Search"
-            className="border border-e-gray-400 px-3 py-2 rounded-md ml-2"
-          />
-        </form>
+
+        <div>
+          <label htmlFor="select">
+            Order:{" "}
+            <select
+              name="order"
+              id="order"
+              value={order}
+              onChange={(e) => setOrder(e.target.value as "asc" || "desc")}
+              className="border border-gray-300 rounded-md px-2 py-1 text-gray-600 "
+            >
+              <option value="asc">Asending</option>
+              <option value="desc">Desending</option>
+            </select>
+          </label>
+        </div>
       </div>
       <div className=" mt-2 p-5 flex flex-wrap gap-4 justify-center">
         {loading && (
@@ -97,7 +89,7 @@ const Author = () => {
 
         {error && <p className="text-center text-red-500">{error}</p>}
 
-        {blog?.map((itm) => (
+        {sortedBlog?.map((itm) => (
           <div
             key={itm?.id}
             className=" border border-gray-300 p-5  rounded-md w-[460px] flex flex-col items-start justify-between shadow-xl "
