@@ -51,7 +51,13 @@ const Routes = createBrowserRouter([
             // element: <Home />,
             element: (
               // <Suspense fallback={()=> (FallBack)}>
-              <Suspense fallback={<h2 className="text-center text-red-500 text-lg">Loading...</h2>}>
+              <Suspense
+                fallback={
+                  <h2 className="text-center text-red-500 text-lg">
+                    Loading...
+                  </h2>
+                }
+              >
                 <Home />
               </Suspense>
             ),
